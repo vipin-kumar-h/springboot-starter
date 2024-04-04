@@ -22,8 +22,8 @@ jobs:
           name: junit.zip
           location: stratus://pipe/
 stages:
-  image: maven
   - name: build
+    image: maven
     jobs:
       - maven-check
       - unit-test
