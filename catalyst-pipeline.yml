@@ -6,13 +6,24 @@ images:
       username: thangaram611
       password: Catalyst@1
 jobs:
-  maven:
-    image: maven
+  maven-check:
     steps:
       - java -version
       - javac -version
       - mvn -version
+  unit-test:
+    steps:
+      - mvn surefire-report:report
+    artifacts:
+      upload:
+        - type: zip
+          regex:
+            - '**/target/site/**.*'
+          name: junit.zip
+          location: stratus://pipe/
 stages:
+  image: maven
   - name: build
     jobs:
-      - maven
+      - maven-check
+      - unit-test
