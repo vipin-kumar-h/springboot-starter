@@ -20,7 +20,7 @@ jobs:
       upload:
         - type: zip
           regex:
-            - '/catalyst/target/site/**'
+            - '/catalyst/target/site/.*'
           name: junit.zip
           location: stratus://pipe/
 stages:
