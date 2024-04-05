@@ -15,11 +15,12 @@ jobs:
     steps:
       - mvn surefire-report:report
       - ls
+      - pwd
     artifacts:
       upload:
         - type: zip
           regex:
-            - './target/site/**/*'
+            - '/target/site/**/*'
           name: junit.zip
           location: stratus://pipe/
 stages:
