@@ -20,7 +20,7 @@ jobs:
           regex:
             - '**/target/site/**.*'
           name: junit.zip
-          location: stratus://pipe/unittest
+          location: stratus://pipe/
 stages:
   - name: build
     image: maven
