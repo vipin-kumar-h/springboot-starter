@@ -14,8 +14,8 @@ jobs:
   unit-test:
     steps:
       - mvn surefire-report:report
+      - cd target
       - ls
-      - pwd
     artifacts:
       upload:
         - type: zip
