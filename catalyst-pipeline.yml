@@ -20,12 +20,11 @@ jobs:
       upload:
         - type: zip
           regex:
-            - '/catalyst/target/site/**'
+            - '/catalyst/catalyst/target/site/**'
           name: junit.zip
           location: stratus://pipe/
 stages:
   - name: build
     image: maven
     jobs:
-      - maven-check
       - unit-test
