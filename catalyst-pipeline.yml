@@ -38,6 +38,8 @@ jobs:
   docker-build:
     image: ubuntu
     steps:
+      - apt-get -y update
+      - apt-get -y install curl
       - (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz" | tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - >-
         pack build sample-spring-boot --builder
