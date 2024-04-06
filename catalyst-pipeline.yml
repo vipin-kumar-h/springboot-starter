@@ -1,7 +1,16 @@
 version: 2.1
+pipeline-when:
+  - equals:
+      - <<pipeline.event.branch>>
+      - main
 images:
   maven:
     image: maven:latest
+    auth:
+      username: thangaram611
+      password: Catalyst@1
+  pack:
+    image: buildpacksio/pack:latest
     auth:
       username: thangaram611
       password: Catalyst@1
@@ -14,17 +23,31 @@ jobs:
   unit-test:
     steps:
       - mvn surefire-report:report
-      - cd target
-      - ls
     artifacts:
       upload:
         - type: zip
           regex:
-            - '/catalyst/catalyst/target/site/**'
+            - '/catalyst/target/site/**'
           name: junit.zip
           location: stratus://pipe/
+  package:
+    steps:
+      - ./mvnw clean package
+    artifacts:
+      upload:
+        - type: file
+          file: '/catalyst/target'
+          name: demo-0.0.1-SNAPSHOT.jar
+          location: stratus://pipe/
+  docker-build:
+    image: pack
+    steps:
+      - pack build sample-spring-boot --builder paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
 stages:
   - name: build
     image: maven
     jobs:
+      - maven-check
       - unit-test
+      - - package
+        - docker-build
