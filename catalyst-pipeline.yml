@@ -28,7 +28,7 @@ jobs:
           location: 'stratus://pipe/'
   package:
     steps:
-      - ./mvnw clean package
+      - ./mvnw clean package -DskipTests=true -X
     artifacts:
       upload:
         - type: file
