@@ -5,8 +5,8 @@ images:
     auth:
       username: thangaram611
       password: Catalyst@1
-  pack:
-    image: buildpacksio/pack:latest
+  ubuntu:
+    image: ubuntu:latest
     auth:
       username: thangaram611
       password: Catalyst@1
@@ -32,12 +32,15 @@ jobs:
     artifacts:
       upload:
         - type: file
+          name: SNAPSHOT.jar
           file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
           location: stratus://pipe/
-          name: SNAPSHOT
   docker-build:
-    image: pack
+    image: ubuntu
     steps:
+      - sudo add-apt-repository ppa:cncf-buildpacks/pack-cli
+      - sudo apt-get update
+      - sudo apt-get install pack-cli
       - >-
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
