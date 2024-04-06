@@ -38,9 +38,7 @@ jobs:
   docker-build:
     image: ubuntu
     steps:
-      - add-apt-repository ppa:cncf-buildpacks/pack-cli
-      - apt-get update
-      - apt-get install pack-cli
+      - (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz" | tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - >-
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
