@@ -32,8 +32,7 @@ jobs:
     artifacts:
       upload:
         - type: file
-          file: /catalyst/target
-          name: demo-0.0.1-SNAPSHOT.jar
+          file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
           location: 'stratus://pipe/'
   docker-build:
     image: pack
