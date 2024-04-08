@@ -105,7 +105,8 @@ stages:
         - docker-build
   - name: deploy
     when:
-      not: false
+      not:
+        false
     jobs:
       - - docker-deploy
         - catalyst-deploy
