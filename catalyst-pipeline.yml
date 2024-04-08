@@ -65,6 +65,10 @@ jobs:
           file: /catalyst/spring-img.tar
           location: stratus://pipe/
   docker-deploy:
+    when:
+      equal:
+        - << pipeline.status.build.docker-build >>
+        - success
     image: docker
     steps:
       - docker load -i spring-img.tar
@@ -79,6 +83,10 @@ jobs:
           file: /catalyst/spring-img.tar
           location: stratus://pipe/
   catalyst-deploy:
+    when:
+      equal:
+        - << pipeline.status.build.package >>
+        - success
     steps:
       - catalyst deploy
     artifacts:
