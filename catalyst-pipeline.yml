@@ -1,4 +1,8 @@
 version: 2.1
+runners:
+  high:
+    config-id: 3
+pipeline-runner: high
 pipeline-when:
   equal:
     - << pipeline.event.ref >>
