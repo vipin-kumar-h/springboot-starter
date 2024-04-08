@@ -49,7 +49,7 @@ jobs:
     image: ubuntu
     steps:
       - apt-get -y update
-      - apt-get -y install curl
+      - apt-get -y install curl podman
       - >-
         (curl -sSL
         "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz"
@@ -57,7 +57,7 @@ jobs:
       - >-
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
-      - docker save -o spring-img.tar sample-spring-boot
+      - podman save -o spring-img.tar sample-spring-boot
     artifacts:
       upload:
         - type: file
