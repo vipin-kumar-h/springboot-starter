@@ -1,8 +1,8 @@
 version: 2.1
-pipeline-when:
-  equal:
-    - << pipeline.event.ref >>
-    - main
+#pipeline-when:
+#  equal:
+#    - << pipeline.event.ref >>
+#    - main
 images:
   maven:
     image: maven:latest
