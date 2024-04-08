@@ -1,4 +1,8 @@
 version: 2.1
+pipeline-when:
+    equal:
+        - <<pipeline.event.branch>>
+        - main
 images:
   maven:
     image: maven:latest
