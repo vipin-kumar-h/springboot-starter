@@ -46,10 +46,10 @@ jobs:
           file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
           location: stratus://pipe/
   docker-build:
-    image: ubuntu
+    image: docker
     steps:
-      - apt-get -y update
-      - apt-get -y install curl podman
+      - apk update
+      - apk --no-cache add curl
       - >-
         (curl -sSL
         "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz"
@@ -57,7 +57,7 @@ jobs:
       - >-
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
-      - podman save -o spring-img.tar sample-spring-boot
+      - docker save -o spring-img.tar sample-spring-boot
     artifacts:
       upload:
         - type: file
