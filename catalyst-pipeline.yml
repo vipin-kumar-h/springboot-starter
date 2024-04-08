@@ -1,7 +1,7 @@
 version: 2.1
 pipeline-when:
   equal:
-    - <<pipeline.event.ref>>
+    - << pipeline.event.ref >>
     - main
 images:
   maven:
@@ -17,6 +17,7 @@ images:
 jobs:
   maven-check:
     steps:
+      - echo "<< pipeline.event.ref >>"
       - java -version
       - javac -version
       - mvn -version
