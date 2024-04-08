@@ -14,6 +14,11 @@ images:
     auth:
       username: thangaram611
       password: Catalyst@1
+  docker:
+    image: docker:latest
+    auth:
+      username: thangaram611
+      password: Catalyst@1
 jobs:
   maven-check:
     steps:
@@ -52,6 +57,36 @@ jobs:
       - >-
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
+      - docker save -o spring-img.tar sample-spring-boot
+    artifacts:
+      upload:
+        - type: file
+          name: spring-img.tar
+          file: /catalyst/spring-img.tar
+          location: stratus://pipe/
+  docker-deploy:
+    image: docker
+    steps:
+      - docker load -i spring-img.tar
+      - docker images
+      - docker tag sample-spring-boot thangaram611/private:spring-boot
+      - docker images
+      - docker push thangaram611/private:spring-boot
+    artifacts:
+      download:
+        - type: file
+          name: spring-img.tar
+          file: /catalyst/spring-img.tar
+          location: stratus://pipe/
+  catalyst-deploy:
+    steps:
+      - catalyst deploy
+    artifacts:
+      download:
+        - type: file
+          name: SNAPSHOT.jar
+          file: /catalyst/SNAPSHOT.jar
+          location: stratus://pipe/
 stages:
   - name: build
     image: maven
@@ -60,3 +95,7 @@ stages:
       - unit-test
       - - package
         - docker-build
+  - name: deploy
+    jobs:
+      - - docker-deploy
+        - catalyst-deploy
