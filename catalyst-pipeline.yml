@@ -8,17 +8,17 @@ images:
     image: maven:latest
     auth:
       username: thangaram611
-      password: Catalyst@1
+      password: << pipeline.env.DOCKER_PASS >>
   ubuntu:
     image: ubuntu:latest
     auth:
       username: thangaram611
-      password: Catalyst@1
+      password: << pipeline.env.DOCKER_PASS >>
   docker:
     image: docker:latest
     auth:
       username: thangaram611
-      password: Catalyst@1
+      password: << pipeline.env.DOCKER_PASS >>
 jobs:
   maven-check:
     steps:
