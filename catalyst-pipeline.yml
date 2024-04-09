@@ -97,6 +97,7 @@ jobs:
       - >-
         catalyst deploy appsail --name spring-boot --build-path ./SNAPSHOT.jar
         --stack java17 --platform javase --command "java -jar SNAPSHOT.jar"
+        --verbose
     artifacts:
       download:
         - type: file
