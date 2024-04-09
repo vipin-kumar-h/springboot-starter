@@ -52,7 +52,7 @@ jobs:
   docker-build:
     image: docker
     steps:
-      - apk update
+      - apk update && apk upgrade
       - apk add iptables curl
       - >-
         (curl -sSL
