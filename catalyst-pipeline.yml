@@ -53,7 +53,7 @@ jobs:
     image: docker
     steps:
       - apk update
-      - apk --no-cache add curl iptables
+      - apk add iptables curl
       - >-
         (curl -sSL
         "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz"
