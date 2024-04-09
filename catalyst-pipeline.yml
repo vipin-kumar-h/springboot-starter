@@ -62,6 +62,7 @@ jobs:
         pack build sample-spring-boot --builder
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
       - docker save -o spring-img.tar sample-spring-boot
+      - du -sh spring-img.tar
     artifacts:
       upload:
         - type: file
