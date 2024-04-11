@@ -39,7 +39,7 @@ jobs:
           regex:
             - /catalyst/target/site/**
           name: junit.zip
-          location: stratus://pipe/
+          location: stratus://pipe-development/
   package:
     steps:
       - mvn clean package -DskipTests=true
@@ -48,7 +48,7 @@ jobs:
         - type: file
           name: SNAPSHOT.jar
           file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
-          location: stratus://pipe/
+          location: stratus://pipe-development/
   docker-build:
     image: docker
     steps:
@@ -68,7 +68,7 @@ jobs:
         - type: file
           name: spring-img.tar
           file: /catalyst/spring-img.tar
-          location: stratus://pipe/
+          location: stratus://pipe-development/
   docker-deploy:
     when:
       equal:
@@ -86,7 +86,7 @@ jobs:
         - type: file
           name: spring-img.tar
           file: /catalyst/spring-img.tar
-          location: stratus://pipe/
+          location: stratus://pipe-development/
   catalyst-deploy:
     when:
       equal:
@@ -103,7 +103,7 @@ jobs:
         - type: file
           name: SNAPSHOT.jar
           file: /catalyst/SNAPSHOT.jar
-          location: stratus://pipe/
+          location: stratus://pipe-development/
 stages:
   - name: build
     image: maven
