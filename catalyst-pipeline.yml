@@ -5,28 +5,28 @@ runners:
 pipeline-runner: high
 pipeline-when:
   equal:
-    - << pipeline.event.ref >>
+    - << event.ref >>
     - refs/heads/main
 images:
   maven:
     image: maven:latest
     auth:
       username: thangaram611
-      password: << pipeline.env.DOCKER_PASS >>
+      password: << env.DOCKER_PASS >>
   ubuntu:
     image: ubuntu:latest
     auth:
       username: thangaram611
-      password: << pipeline.env.DOCKER_PASS >>
+      password: << env.DOCKER_PASS >>
   docker:
     image: docker:latest
     auth:
       username: thangaram611
-      password: << pipeline.env.DOCKER_PASS >>
+      password: << env.DOCKER_PASS >>
 jobs:
   maven-check:
     steps:
-      - echo "<< pipeline.event.ref >>"
+      - echo "<< event.ref >>"
       - java -version
       - javac -version
       - mvn -version
@@ -72,7 +72,7 @@ jobs:
   docker-deploy:
     when:
       equal:
-        - << pipeline.status.build.docker-build >>
+        - << status.build.docker-build >>
         - success
     image: docker
     steps:
@@ -90,7 +90,7 @@ jobs:
   catalyst-deploy:
     when:
       equal:
-        - << pipeline.status.build.package >>
+        - << status.build.package >>
         - success
     steps:
       - printenv
