@@ -112,10 +112,10 @@ stages:
       - maven-check
       - unit-test
       - - package
-        - docker-build
+        # - docker-build
   - name: deploy
     when:
       not: false
     jobs:
-      - - docker-deploy
-        - catalyst-deploy
+      - - catalyst-deploy
+        # - docker-deploy
