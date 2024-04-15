@@ -86,7 +86,7 @@ jobs:
       download:
         - type: file
           name: spring-img.tar
-          file: /catalyst/spring-img.tar
+          file: /spring-img.tar
           location: stratus://pipe-development/
   catalyst-deploy:
     when:
@@ -103,7 +103,7 @@ jobs:
       download:
         - type: file
           name: SNAPSHOT.jar
-          file: /catalyst/SNAPSHOT.jar
+          file: /SNAPSHOT.jar
           location: stratus://pipe-development/
 stages:
   - name: build
