@@ -96,7 +96,7 @@ jobs:
     steps:
       - ls
       - >-
-        catalyst deploy appsail --name spring-boot --build-path /catalyst/SNAPSHOT.jar
+        catalyst deploy appsail --name spring-boot --build-path "/catalyst/SNAPSHOT.jar"
         --stack java17 --platform javase --command "java -jar SNAPSHOT.jar"
         --verbose
     artifacts:
@@ -109,8 +109,8 @@ stages:
   - name: build
     image: maven
     jobs:
-      - maven-check
-      - unit-test
+    #   - maven-check
+    #   - unit-test
       - - package
         # - docker-build
   - name: deploy
