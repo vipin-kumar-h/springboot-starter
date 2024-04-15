@@ -94,7 +94,7 @@ jobs:
         - << status.build.package >>
         - success
     steps:
-      - du -sh SNAPSHOT.jar
+      - ls
       - >-
         catalyst deploy appsail --name spring-boot --build-path /catalyst/SNAPSHOT.jar
         --stack java17 --platform javase --command "java -jar SNAPSHOT.jar"
