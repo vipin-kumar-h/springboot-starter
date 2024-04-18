@@ -26,6 +26,10 @@ jobs:
     image: maven
     steps:
       - echo "hello world!"
+  mvn-check2:
+    image: maven
+    steps:
+      - echo "hello world!"
   unit-test:
     steps:
       - printenv
@@ -116,4 +120,4 @@ stages:
       not: false
     jobs:
       - - catalyst-deploy
-        - mvn-check
+        - mvn-check2
