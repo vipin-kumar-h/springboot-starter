@@ -26,6 +26,12 @@ jobs:
     image: maven
     steps:
       - echo "hello world!"
+    artifacts:
+      download:
+        - type: file
+          name: spring-img.tar
+          file: /spring-img.tar
+          location: stratus://pipe-development/
   mvn-check2:
     image: maven
     steps:
