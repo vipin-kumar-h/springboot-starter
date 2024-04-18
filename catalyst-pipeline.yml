@@ -116,4 +116,3 @@ stages:
       not: false
     jobs:
       - - catalyst-deploy
-        - mvn-check
