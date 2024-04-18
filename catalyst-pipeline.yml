@@ -109,13 +109,13 @@ stages:
   - name: build
     image: maven
     jobs:
-    #   - maven-check
-    #   - unit-test
+      - maven-check
+      - unit-test
       - - package
-        # - docker-build
+        - docker-build
   - name: deploy
     when:
       not: false
     jobs:
       - - catalyst-deploy
-        # - docker-deploy
+        - docker-deploy
