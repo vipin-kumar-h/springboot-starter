@@ -12,11 +12,6 @@ images:
     auth:
       username: thangaram611
       password: << env.DOCKER_PASS >>
-  ubuntu:
-    image: ubuntu:latest
-    auth:
-      username: thangaram611
-      password: << env.DOCKER_PASS >>
   docker:
     image: docker:latest
     auth:
@@ -25,9 +20,10 @@ images:
 jobs:
   maven-check:
     steps:
-      - echo "<< event.ref >>"
       - java -version
       - javac -version
+  mvn-check:
+    steps:
       - mvn -version
   unit-test:
     steps:
@@ -109,7 +105,8 @@ stages:
   - name: build
     image: maven
     jobs:
-      - maven-check
+      - - maven-check
+        - mvn-check
       - unit-test
       - - package
         - docker-build
