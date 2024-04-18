@@ -23,8 +23,9 @@ jobs:
       - java -version
       - javac -version
   mvn-check:
+    image: maven
     steps:
-      - mvn -version
+      - echo "hello world!"
   unit-test:
     steps:
       - printenv
@@ -115,4 +116,5 @@ stages:
       not: false
     jobs:
       - - catalyst-deploy
-        - docker-deploy
+        # - docker-deploy
+        - mvn-check
