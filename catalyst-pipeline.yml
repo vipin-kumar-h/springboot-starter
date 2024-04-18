@@ -97,7 +97,7 @@ jobs:
       - ls
       - >-
         catalyst deploy appsail --name spring-boot --build-path "/catalyst/SNAPSHOT.jar"
-        --stack java17 --platform javase --command "sh -c 'java -jar SNAPSHOT.jar --server.port=${X_ZOHO_CATALYST_LISTEN_PORT}'"
+        --stack java17 --platform javase --command "sh -c 'java -jar SNAPSHOT.jar --server.port=\${X_ZOHO_CATALYST_LISTEN_PORT}'"
         --verbose
     artifacts:
       download:
