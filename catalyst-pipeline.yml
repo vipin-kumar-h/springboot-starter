@@ -60,6 +60,7 @@ jobs:
           file: /catalyst/spring-img.tar
           location: stratus://pipe-development/
   docker-deploy:
+    runner: high
     when:
       equal:
         - << status.build.docker-build >>
