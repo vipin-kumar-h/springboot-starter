@@ -71,6 +71,7 @@ jobs:
       - docker images
       - docker tag sample-spring-boot thangaram611/private:spring-boot
       - docker images
+      - docker login -u thangaram611 -p << env.DOCKER_PASS >> docker.io
       - docker push thangaram611/private:spring-boot
     artifacts:
       download:
