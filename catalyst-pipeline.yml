@@ -10,12 +10,12 @@ images:
   maven:
     image: maven:3.8.5-openjdk-17
     auth:
-      username: vipinkumarh
+      username: hvipinkumar
       password: << env.DOCKER_PASS >>
   docker:
     image: docker:latest
     auth:
-      username: vipinkumarh
+      username: hvipinkumar
       password: << env.DOCKER_PASS >>
 jobs:
   unit-test:
