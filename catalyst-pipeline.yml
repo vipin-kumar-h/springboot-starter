@@ -87,20 +87,35 @@ jobs:
     steps:
       - ls
       - >-
-        catalyst deploy appsail --name spring-boot --build-path "/catalyst/SNAPSHOT.jar"
-        --stack java17 --platform javase --command "sh -c 'java -jar SNAPSHOT.jar --server.port=\${X_ZOHO_CATALYST_LISTEN_PORT}'"
-        --verbose
+        catalyst deploy appsail --name spring-boot --build-path
+        "/catalyst/SNAPSHOT.jar" --stack java17 --platform javase --command "sh
+        -c 'java -jar SNAPSHOT.jar
+        --server.port=\${X_ZOHO_CATALYST_LISTEN_PORT}'" --verbose
     artifacts:
       download:
         - type: file
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
           location: stratus://pipeline-test-2/
+  approval-job:
+    type: approval
+    specification:
+      reviewers:
+        - vipin.kumar+lz_cicd_26@zohotest.com
+      message: >-
+        Hi,
+
+        Kindly find the Test Report below. Verify the results & Kindly approve
+        the pipeline.
+
+        <a
+        href="https://pipeline-test-2-development.lzstratus.com/junit.zip">Results</a>
 stages:
   - name: build
     image: maven
     jobs:
       - unit-test
+      - approval-job
       - - package
         - docker-build
   - name: deploy
