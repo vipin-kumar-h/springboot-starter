@@ -28,7 +28,7 @@ jobs:
           regex:
             - /catalyst/target/site/**
           name: junit.zip
-          location: stratus://pipeline-test-2/
+          location: stratus://pipeline-test-3/
   package:
     steps:
       - mvn clean package -DskipTests=true
@@ -37,7 +37,7 @@ jobs:
         - type: file
           name: SNAPSHOT.jar
           file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
-          location: stratus://pipeline-test-2/
+          location: stratus://pipeline-test-3/
   docker-build:
     runner: high
     image: docker
@@ -58,7 +58,7 @@ jobs:
         - type: file
           name: spring-img.tar
           file: /catalyst/spring-img.tar
-          location: stratus://pipeline-test-2/
+          location: stratus://pipeline-test-3/
   docker-deploy:
     runner: high
     when:
@@ -78,7 +78,7 @@ jobs:
         - type: file
           name: spring-img.tar
           file: /spring-img.tar
-          location: stratus://pipeline-test-2/
+          location: stratus://pipeline-test-3/
   catalyst-deploy:
     when:
       equal:
@@ -96,12 +96,12 @@ jobs:
         - type: file
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
-          location: stratus://pipeline-test-2/
+          location: stratus://pipeline-test-3/
   approval-job:
     type: approval
     specification:
       reviewers:
-        - vipin.kumar+lz_cicd_26@zohotest.com
+        - vipin.kumar+lz_cicd_27@zohotest.com
       message: >-
         Hi,
 
@@ -109,7 +109,7 @@ jobs:
         the pipeline.
 
         <a
-        href="https://pipeline-test-2-development.lzstratus.com/junit.zip">Results</a>
+        href="https://pipeline-test-3-development.lzstratus.com/junit.zip">Results</a>
 stages:
   - name: build
     image: maven
