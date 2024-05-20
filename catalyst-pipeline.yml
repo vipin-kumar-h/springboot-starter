@@ -71,8 +71,8 @@ jobs:
       - docker images
       - docker tag sample-spring-boot hvipinkumar/private:spring-boot
       - docker images
-      - docker login -u vipinkumarh -p << env.DOCKER_PASS >> docker.io
-      - docker push vipinkumarh/private:spring-boot
+      - docker login -u hvipinkumar -p << env.DOCKER_PASS >> docker.io
+      - docker push hvipinkumar/private:spring-boot
     artifacts:
       download:
         - type: file
