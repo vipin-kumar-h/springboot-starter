@@ -104,8 +104,6 @@ stages:
       - - package
         - docker-build
   - name: deploy
-    when:
-      not: false
     jobs:
       - - catalyst-deploy
         - docker-deploy
