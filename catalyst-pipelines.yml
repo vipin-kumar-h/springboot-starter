@@ -26,7 +26,7 @@ jobs:
       upload:
         - type: zip
           regex:
-            - /target/site/**
+            - /catalyst/target/site/**
           name: junit.zip
           location: stratus://demobucket123/
   package:
