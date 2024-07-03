@@ -50,7 +50,7 @@ jobs:
         | tar -C /usr/local/bin/ --no-same-owner -xzv pack)
       - >-
         pack build sample-spring-boot --builder
-        paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21
+        paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21 --trust-builder --network=host
       - docker save -o spring-img.tar sample-spring-boot
       - du -sh spring-img.tar
     artifacts:
