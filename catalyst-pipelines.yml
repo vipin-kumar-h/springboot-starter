@@ -42,6 +42,8 @@ jobs:
     runner: high
     image: docker
     steps:
+      - docker run -it --rm --privileged docker:dind &
+      - docker exec -it $(docker ps -q) sh
       - apk update && apk upgrade
       - apk add curl
       - >-
@@ -53,6 +55,8 @@ jobs:
         paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21 --trust-builder --network=host
       - docker save -o spring-img.tar sample-spring-boot
       - du -sh spring-img.tar
+      - exit
+      - docker stop $(docker ps -q)
     artifacts:
       upload:
         - type: file
