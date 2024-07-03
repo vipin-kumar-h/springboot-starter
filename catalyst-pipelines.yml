@@ -43,7 +43,7 @@ jobs:
     image: docker
     steps:
       - docker run -it --rm --privileged docker:dind &
-      - docker exec -it $(docker ps -q) sh
+      - echo $(docker ps -q)
       - apk update && apk upgrade
       - apk add curl
       - >-
