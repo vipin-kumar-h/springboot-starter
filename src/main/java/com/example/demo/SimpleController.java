@@ -9,6 +9,6 @@ public class SimpleController {
 
   @GetMapping
   public String hello() {
-    return "Hello World! This application is built, tested & deployed in Catalyst Appsail using Catalyst Pipelines!";
+    return "Hello World!!";
   }
 }
