@@ -1,4 +1,5 @@
 version: 4.2
+pipeline-runner: high
 runners:
   high:
     config-id: 3
