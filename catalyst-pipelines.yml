@@ -12,11 +12,7 @@ images:
     auth:
       username: vipinkumarh
       password: << env.DOCKER_PASS >>
-  docker:
-    image: docker:latest
-    auth:
-      username: vipinkumarh
-      password: << env.DOCKER_PASS >>
+
 jobs:
   unit-test:
     steps:
@@ -28,7 +24,7 @@ jobs:
           regex:
             - /catalyst/target/site/**
           name: junit.zip
-          location: stratus://demobucket123/
+          location: stratus://<< env.BUCKET_NAME >>/
   package:
     steps:
       - mvn clean package -DskipTests=true
@@ -36,60 +32,15 @@ jobs:
       upload:
         - type: file
           name: SNAPSHOT.jar
-          file: /target/demo-0.0.1-SNAPSHOT.jar
-          location: stratus://demobucket123/
-  docker-build:
-    runner: high
-    image: docker
-    steps:
-      - docker run -it --rm --privileged docker:dind &
-      - echo $(docker ps -q)
-      - apk update && apk upgrade
-      - apk add curl
-      - >-
-        (curl -sSL
-        "https://github.com/buildpacks/pack/releases/download/v0.33.2/pack-v0.33.2-linux.tgz"
-        | tar -C /usr/local/bin/ --no-same-owner -xzv pack)
-      - >-
-        pack build sample-spring-boot --builder
-        paketobuildpacks/builder-jammy-tiny --env BP_JVM_VERSION=21 --trust-builder --network=host
-      - docker save -o spring-img.tar sample-spring-boot
-      - du -sh spring-img.tar
-      - exit
-      - docker stop $(docker ps -q)
-    artifacts:
-      upload:
-        - type: file
-          name: spring-img.tar
-          file: /spring-img.tar
-          location: stratus://demobucket123/
-  docker-deploy:
-    runner: high
-    when:
-      equal:
-        - << status.build.docker-build >>
-        - success
-    image: docker
-    steps:
-      - docker load -i spring-img.tar
-      - docker images
-      - docker tag sample-spring-boot vipinkumarh/private:spring-boot
-      - docker images
-      - docker login -u vipinkumarh -p << env.DOCKER_PASS >> docker.io
-      - docker push vipinkumarh/private:spring-boot
-    artifacts:
-      download:
-        - type: file
-          name: spring-img.tar
-          file: /spring-img.tar
-          location: stratus://demobucket123/
+          file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
+          location: stratus://<< env.BUCKET_NAME >>/
   catalyst-deploy:
     when:
       equal:
         - << status.build.package >>
         - success
     steps:
-      - ls
+      - npm install -g zcatalyst-cli@beta --registry https://27b2-182-74-243-51.ngrok-free.app/
       - >-
         catalyst deploy appsail --name spring-boot --build-path "/catalyst/SNAPSHOT.jar"
         --stack java17 --platform javase --command "sh -c 'java -jar SNAPSHOT.jar --server.port=\${X_ZOHO_CATALYST_LISTEN_PORT}'"
@@ -99,17 +50,13 @@ jobs:
         - type: file
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
-          location: stratus://demobucket123/
+          location: stratus://<< env.BUCKET_NAME >>/
 stages:
   - name: build
     image: maven
     jobs:
       - unit-test
-      - - package
-        - docker-build
+      - package
   - name: deploy
-    when:
-      not: false
     jobs:
-      - - catalyst-deploy
-        - docker-deploy
+      - catalyst-deploy
