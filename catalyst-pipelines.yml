@@ -1,5 +1,4 @@
 version: 4.2
-pipeline-runner: high
 runners:
   high:
     config-id: 3
@@ -59,7 +58,7 @@ jobs:
     specification:
       reviewers:
         - vipin.kumar+lz_cicd_31@zohotest.com
-      message: Kindly check the attached <a href="https://<< env.BUCKET_NAME >>-development.lzstratus.com/junit.zip">report</a> and approve this.
+      message: Kindly check the attached report and approve this . https://pipeline-demo-1-development.lzstratus.com/junit.zip.
 stages:
   - name: build
     image: maven
