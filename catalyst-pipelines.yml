@@ -32,7 +32,7 @@ jobs:
       upload:
         - type: file
           name: SNAPSHOT.jar
-          file: /catalyst/target/demo-0.0.1-SNAPSHOT.jar
+          file: target/demo-0.0.1-SNAPSHOT.jar
           location: stratus://<< env.BUCKET_NAME >>/
   catalyst-deploy:
     when:
