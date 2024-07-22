@@ -57,8 +57,10 @@ jobs:
     type: approval
     specification:
       reviewers:
-        - vipin.kumar+lz_cicd_31@zohotest.com
-      message: Kindly check the attached report and approve this . https://pipeline-demo-1-development.lzstratus.com/junit.zip.
+        - vipin.kumar+au_test_3@zohotest.com
+      message: >-
+        Kindly check the attached report and approve this .
+        https://vipinpipelinetest-development.zohostratus.com.au/junit.zip
 stages:
   - name: build
     image: maven
