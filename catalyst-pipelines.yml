@@ -1,7 +1,7 @@
 version: 4.2
 runners:
   high:
-    config-id: 2
+    config-id: 3
 pipeline-when:
   equal:
     - << event.ref >>
