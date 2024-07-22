@@ -15,7 +15,6 @@ images:
 jobs:
   unit-test:
     steps:
-      - printenv
       - mvn surefire-report:report
     artifacts:
       upload:
@@ -39,6 +38,8 @@ jobs:
         - << status.build.package >>
         - success
     steps:
+      - unset CATALYST_AUTH_URL
+      - unset CATALYST_ADMIN_URL
       - >-
         npm install -g zcatalyst-cli@beta
       - >-
