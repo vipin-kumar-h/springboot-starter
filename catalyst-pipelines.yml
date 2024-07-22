@@ -40,8 +40,7 @@ jobs:
         - success
     steps:
       - >-
-        npm install -g zcatalyst-cli@beta --registry
-        https://27b2-182-74-243-51.ngrok-free.app/
+        npm install -g zcatalyst-cli@beta
       - >-
         catalyst deploy appsail --name spring-boot --build-path
         "/catalyst/SNAPSHOT.jar" --stack java17 --platform javase --command "sh
