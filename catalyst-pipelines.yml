@@ -59,7 +59,7 @@ jobs:
       reviewers:
         - vipin.kumar+au_test_3@zohotest.com
       message: >-
-        Kindly check the attached report and approve this.
+        Kindly check the attached report and approve this!
         https://vipinpipelinetest-development.zohostratus.com.au/junit.zip
 stages:
   - name: build
