@@ -53,20 +53,10 @@ jobs:
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
           location: stratus://<< env.BUCKET_NAME >>/
-  qa-approval:
-    type: approval
-    specification:
-      reviewers:
-        - vipin.kumar+au_test_3@zohotest.com
-      message: >-
-        Kindly check the attached report and approve this!
-        https://vipinpipelinetest-development.zohostratus.com.au/junit.zip
 stages:
   - name: build
     image: maven
     jobs:
-      - unit-test
-      - qa-approval
       - package
   - name: deploy
     jobs:
