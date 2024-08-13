@@ -38,6 +38,7 @@ jobs:
         - << status.build.package >>
         - success
     steps:
+      - printenv
       - >-
         npm install -g zcatalyst-cli@beta
       - >-
