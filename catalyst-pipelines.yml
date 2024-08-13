@@ -39,8 +39,7 @@ jobs:
         - success
     steps:
       - printenv
-      - >-
-        npm install -g zcatalyst-cli@beta
+      - npm install -g zcatalyst-cli@beta
       - >-
         catalyst deploy appsail --name spring-boot --build-path
         "/catalyst/SNAPSHOT.jar" --stack java17 --platform javase --command "sh
@@ -52,7 +51,18 @@ jobs:
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
           location: stratus://<< env.BUCKET_NAME >>/
+  qa-approval:
+    type: approval
+    specification:
+      reviewers:
+        - vipin.kumar+us_test_1@zohotest.com
+      message: Kindly check the test report & approve!
 stages:
+  - name: test
+    image: maven
+    jobs:
+      - unit-test
+      - qa-approval
   - name: build
     image: maven
     jobs:
