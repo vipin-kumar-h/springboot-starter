@@ -10,7 +10,7 @@ images:
   maven:
     image: maven:3.8.5-openjdk-17
     auth:
-      username: amelia
+      username: vipinkumarh
       password: << env.DOCKER_PASS >>
 jobs:
   unit-test:
