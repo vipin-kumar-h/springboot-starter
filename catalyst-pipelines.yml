@@ -16,16 +16,11 @@ jobs:
   unit-test:
     steps:
       - mvn surefire-report:report
-      - ls
-      - cd target
-      - ls
-      - cd site
-      - ls
     artifacts:
       upload:
         - type: zip
           regex:
-            -  /target/site/**
+            -  /catalyst/target/surefire-reports/**
           name: junit.zip
           location: stratus://<< env.BUCKET_NAME >>/
   package:
