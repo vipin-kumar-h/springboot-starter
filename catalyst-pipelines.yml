@@ -10,7 +10,7 @@ images:
   maven:
     image: maven:3.8.5-openjdk-17
     auth:
-      username: vipinkumarh
+      username: amelia
       password: << env.DOCKER_PASS >>
 jobs:
   unit-test:
@@ -20,7 +20,7 @@ jobs:
       upload:
         - type: zip
           regex:
-            - /catalyst/target/site/**
+            - /target/site/**
           name: junit.zip
           location: stratus://<< env.BUCKET_NAME >>/
   package:
