@@ -51,18 +51,11 @@ jobs:
           name: SNAPSHOT.jar
           file: /SNAPSHOT.jar
           location: stratus://<< env.BUCKET_NAME >>/
-  qa-approval:
-    type: approval
-    specification:
-      reviewers:
-        - vipin.kumar+us_test_1@zohotest.com
-      message: Kindly check the test report & approve!
 stages:
   - name: test
     image: maven
     jobs:
       - unit-test
-      - qa-approval
   - name: build
     image: maven
     jobs:
