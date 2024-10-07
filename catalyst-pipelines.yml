@@ -56,7 +56,7 @@ jobs:
     specification:
       reviewers:
         - vipin.kumar+us_test_1@zohotest.com
-      message: Kindly check the test report & approve!
+      message: Kindly check the test report & approve
 stages:
   - name: test
     image: maven
