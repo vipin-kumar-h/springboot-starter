@@ -2,10 +2,6 @@ version: 4.2
 runners:
   high:
     config-id: 3
-pipeline-when:
-  equal:
-    - << event.ref >>
-    - refs/heads/main
 images:
   maven:
     image: maven:3.8.5-openjdk-17
